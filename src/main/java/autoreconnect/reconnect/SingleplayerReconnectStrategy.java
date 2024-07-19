@@ -18,13 +18,13 @@ public class SingleplayerReconnectStrategy extends ReconnectStrategy {
     }
 
     /**
-     * @see net.minecraft.client.QuickPlay#startSingleplayer(MinecraftClient, String)
+//     * @see net.minecraft.client.QuickPlay#startSingleplayer(MinecraftClient, String)
      */
     @Override
     public void reconnect() {
         MinecraftClient client = MinecraftClient.getInstance();
         if (!client.getLevelStorage().levelExists(getName())) return;
         client.setScreenAndRender(new MessageScreen(Text.translatable("selectWorld.data_read")));
-        client.createIntegratedServerLoader().start(new TitleScreen(), getName());
+        client.createIntegratedServerLoader().start(getName(), () -> client.setScreen(new TitleScreen()));
     }
 }
